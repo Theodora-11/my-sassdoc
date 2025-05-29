@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "sassdoc scss --dest docs && git add docs && git commit -m \"Update SassDoc\" && git push"
+    "docs": "sassdoc scss --dest docs && git add docs && git commit -m \"Update SassDoc\" && git push",
+    "commit-docs": "git add docs && git commit -m \"Update docs\" && git push"
   },
   "keywords": [],
   "author": "",

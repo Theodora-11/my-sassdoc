@@ -1,0 +1,78 @@
+@use "sass:map";
+@use './resets' as resets;
+@use './variables' as variables;
+@use './mixins' as mixins;
+
+
+/// Sets the width, height, and background color of an element
+/// @param {Length} $w - The width of the element
+/// @param {Length} $h - The height of the element
+/// @param {Color} $bg - The background color
+/// @example
+///   @include box-style(200px, 100px, lightblue);
+@mixin box-style($w, $h, $bg) {
+  width: $w;
+  height: $h;
+  background-color: $bg;
+}
+
+
+@function weight($type) {
+  @if ($type == 'light') {
+    @return variables.$font-weights,light;
+
+  } @else if ($type == 'normal') {
+    @return variables.$font-weights,normal;
+
+  } @else if ($type == 'bold') {
+
+    @return variables.$font-weights,bold;
+
+  } @else {
+    @error 'Invalid font weight type: #{$type}';
+  }
+}
+
+
+body {
+  color: variables.$text-color;
+  background: variables.$primary-color;
+  font-weight: bold;
+}
+
+
+.main {
+  @include mixins.flexCenter(column, center, center);
+  width: 80% - 10%;
+  margin-inline: auto;
+
+  #{&}__paragraph1 {
+    font-size: 1.2rem;
+
+    &:hover {
+      color: variables.$secondary-color;
+    }
+  }
+
+  #{&}__paragraph2 {
+    @extend .main__paragraph1;
+
+    &:hover {
+      color: variables.$third-color;
+    }
+  }
+
+  @include mobile {
+    @include mixins.flexCenter(row);
+    border: 2px solid variables.$text-color
+  }
+}
+ 
+h1 {
+  text-align: center;
+}
+
+.dark {
+  @include mixins.theme($dark-theme: false);
+}
+ 

@@ -1,0 +1,63 @@
+
+
+//List of allow values:
+$allowed-directions: ('row', 'column', 'row-reverse', 'column-reverse');
+$allowed-justify: ('flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly');
+$allowed-align: ('flex-start', 'flex-end', 'center', 'baseline', 'stretch');
+
+//Flex box centering in the center
+///@param {String} $direction [row] - The direction of the flex container (row, column, row-reverse, column-reverse);
+///@param {String} $justify [center] - The justify-content property (default is center);
+///@param {String} $align [center]- The align-items property (default is center);
+///@example 
+/// -> in scss:
+/// .main {
+///   @include flexCenter(column, flex-start, center)
+/// } 
+/// 
+/// 
+/// -> in css:
+/// .main {
+///   display: flex;
+///   justify-content: flex-start;
+///   align-items: center;
+///   flex-direction: column;
+/// }
+///  
+
+
+@mixin flexCenter($direction, $justify: center, $align: center) {
+  @if not index($allowed-directions, $direction) {
+    @error 'Invalid direction: "#{$direction}". Allow values: #{inspect($allowed-directions)}.';
+  }
+
+  @if not index($allowed-justify, $justify) {
+    @error 'Invalid justify value: "#{$justify}". Allow values: #{inspect($allowed-justify)}.';
+  }
+
+  @if not index($allowed-align, $align) {
+    @error 'Invalid align value: "#{$align}". Allow values: #{inspect($allowed-align)}.';
+  }
+
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+
+
+//-------theme mixin -------------//
+@mixin theme($dark-theme: true) {
+  @if $dark-theme {
+    background: lighten(variables.$primary-color, 40%);
+    color: darken(variables.$text-color, 40%);
+  }
+}
+
+
+@mixin mobile() {
+  @media (min-width: variables.$mobile) {
+    @content;
+  }
+}

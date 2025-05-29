@@ -1,9 +1,11 @@
+
 {
   "name": "beginer-sass",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "sassdoc scss --dest docs && git add docs && git commit -m \"Update SassDoc\" && git push"
   },
   "keywords": [],
   "author": "",
